@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>115 Web 管理器</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">115cli Web</div>
+          <h1>115 文件管理器</h1>
+        </div>
+        <div class="status-pill" id="status-pill">未连接</div>
+      </header>
+
+      <main class="layout">
+        <aside class="sidebar">
+          <section class="panel auth-panel">
+            <div class="panel-head">
+              <h2>登录 Cookie</h2>
+              <button class="ghost" id="logout-btn" type="button">清除</button>
+            </div>
+            <p class="hint">粘贴浏览器登录 115 后复制的 Cookie 字符串，包含 UID / CID / SEID / KID。</p>
+            <textarea id="cookie-input" rows="6" placeholder="UID=...; CID=...; SEID=...; KID=..."></textarea>
+            <button id="save-cookie-btn" type="button">保存并连接</button>
+          </section>
+
+          <section class="panel account-panel">
+            <div class="panel-head">
+              <h2>账户</h2>
+            </div>
+            <div id="account-card" class="card-empty">暂无数据</div>
+          </section>
+
+          <section class="panel tips-panel">
+            <h2>操作</h2>
+            <ul>
+              <li>双击目录进入</li>
+              <li>下载会由服务器代为转发</li>
+              <li>上传支持多文件和文件夹</li>
+            </ul>
+          </section>
+        </aside>
+
+        <section class="workspace">
+          <section class="panel toolbar-panel">
+            <div class="crumbs" id="breadcrumbs"></div>
+            <div class="toolbar-row">
+              <div class="actions">
+                <button id="refresh-btn" type="button">刷新</button>
+                <button id="mkdir-btn" type="button">新建文件夹</button>
+                <button id="upload-btn" type="button">上传文件</button>
+                <button id="folder-upload-btn" type="button">上传文件夹</button>
+                <button id="back-btn" type="button">返回上级</button>
+              </div>
+              <label class="searchbox">
+                <input id="search-input" type="search" placeholder="搜索文件或目录" />
+                <select id="search-scope">
+                  <option value="current">当前目录</option>
+                  <option value="all">全局</option>
+                </select>
+                <button id="search-btn" type="button">搜索</button>
+              </label>
+            </div>
+          </section>
+
+          <section class="panel table-panel">
+            <div class="table-meta">
+              <div id="path-label">/</div>
+              <div id="entry-count">0 项</div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>名称</th>
+                    <th>大小</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody id="file-list">
+                  <tr><td colspan="4" class="muted">请先登录并加载目录。</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+      </main>
+
+      <input id="upload-input" type="file" multiple hidden />
+      <input id="folder-input" type="file" multiple webkitdirectory hidden />
+      <div id="toast" class="toast"></div>
+    </div>
+    <script src="/static/app.js"></script>
+  </body>
+  </html>
